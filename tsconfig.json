@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "noUnusedParameters": true,
+    "importHelpers": true,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "newLine": "lf",
+    "types": ["node", "vue"],
+    "target": "esnext",
+    "module": "esnext", // this enables stricter inference for data properties on `this`
+    "strict": true,
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["resources/js/*"]
+    },
+    "skipLibCheck": true, // Skip type checking of declaration files
+    "noImplicitAny": false // Bypass raising errors on `any` type
+  },
+  "exclude": ["node_modules", "public", "dist"],
+  "include": ["resources/js/**/*", "shims-vue.d.ts"] // Frontend paths pattern
+}
