@@ -34,7 +34,7 @@ import route from "ziggy-js";
 import { RouteAdaptorComposition, useDefaultAdaptor } from "../../Adaptors";
 import { LaravelPagination, useLaravelPagination } from "../../Pagination";
 import { LaravelDataTableColumns } from "..";
-import { useLaravelDataTable } from "..";
+import { useLaravelDataTable } from "./useDataTable";
 
 export default defineComponent({
   name: "LaravelDataTable",

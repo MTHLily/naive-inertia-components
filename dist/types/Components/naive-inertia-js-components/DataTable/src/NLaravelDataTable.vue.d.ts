@@ -1,5 +1,6 @@
 import { PropType } from "vue";
 import route from "ziggy-js";
+import { RouteAdaptorComposition } from "../../Adaptors";
 import { LaravelPagination } from "../../Pagination";
 import { LaravelDataTableColumns } from "..";
 declare const _default: import("vue").DefineComponent<{
@@ -13,7 +14,7 @@ declare const _default: import("vue").DefineComponent<{
     };
     adaptor: {
         type: PropType<RouteAdaptorComposition>;
-        default: () => import("../../Adaptors/interface").RouteAdaptorComposition;
+        default: () => RouteAdaptorComposition;
     };
     loading: {
         type: BooleanConstructor;
@@ -21,8 +22,20 @@ declare const _default: import("vue").DefineComponent<{
     };
 }, {
     handleTextFilterUpdate: (value: any) => void;
-    pagination: import("vue").ComputedRef<any>;
-    datatable: any;
+    pagination: import("vue").ComputedRef<{
+        handlePageChange: (page: number) => void;
+        handlePageSizeChange: (perPage: number) => void;
+        paginationProps: import("vue").ComputedRef<import("naive-ui").PaginationProps>;
+        loading: import("vue").Ref<boolean> | undefined;
+    }>;
+    datatable: {
+        columns: import("vue").Ref<import("./interface").LaravelDataTableColumn<unknown>[]>;
+        filterColumns: import("./interface").LaravelDataTableColumn<unknown>[];
+        handleCheckFilter: import("naive-ui/lib/data-table/src/interface").OnUpdateFilters;
+        handleTextFilter: import("./interface").OnFilterText;
+        handleDateRangeFilter: import("./interface").OnFilterDateRange;
+        handleSort: import("./interface").OnHandleSort;
+    };
     route: typeof route;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     columns: {
@@ -35,7 +48,7 @@ declare const _default: import("vue").DefineComponent<{
     };
     adaptor: {
         type: PropType<RouteAdaptorComposition>;
-        default: () => import("../../Adaptors/interface").RouteAdaptorComposition;
+        default: () => RouteAdaptorComposition;
     };
     loading: {
         type: BooleanConstructor;

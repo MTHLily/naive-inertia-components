@@ -1,5 +1,11 @@
-export * from "./DataTable";
-export * from "./Pagination";
-export * from "./Adaptors";
-export * from "./FormItem";
-export * from "./Helpers";
+export {
+  NInertiaDataTable,
+  NLaravelDataTable,
+  LaravelDataTableColumns,
+} from "./DataTable";
+export {
+  NInertiaPagination,
+  NLaravelPagination,
+  LaravelPagination,
+} from "./Pagination";
+export { NInertiaFormItem } from "./FormItem";

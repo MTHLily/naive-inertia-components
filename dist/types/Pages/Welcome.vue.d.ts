@@ -1,4 +1,4 @@
-import { LaravelDataTableColumn, LaravelPagination } from "@/Components/naive-inertia-js-components";
+import { LaravelPagination } from "@/Components/naive-inertia-js-components";
 import { User } from "@/Types/models";
 import { PropType } from "vue";
 declare const _default: import("vue").DefineComponent<{
@@ -110,7 +110,7 @@ declare const _default: import("vue").DefineComponent<{
     }>;
     routeValue: string;
     table: {
-        columns: LaravelDataTableColumn<unknown>[];
+        columns: LaravelDataTableColumn[];
     };
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     users: {
