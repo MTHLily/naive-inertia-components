@@ -5,7 +5,7 @@
 <script lang="ts">
 import { NPagination } from "naive-ui";
 import { defineComponent, PropType, ref, Ref } from "vue";
-import { RouteAdaptorComposition } from "../../Adaptors/interface";
+import { RouteAdaptorComposition } from "../../Adaptors";
 import { LaravelPagination } from "./interface";
 import { useLaravelPagination } from "./usePagination";
 

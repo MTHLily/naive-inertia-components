@@ -7,26 +7,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from "vue";
-import { LaravelDataTableColumn } from "./interface";
-import { LaravelPagination } from "../../Pagination/src/interface";
+import { defineComponent, PropType } from "vue";
+import { LaravelPagination } from "../../Pagination";
 import { useInertiaAdaptor } from "../../Adaptors";
+import { LaravelDataTableColumns } from "./interface";
 import NLaravelDataTable from "./NLaravelDataTable.vue";
 
 export default defineComponent({
-  name: "LaravelDataTable",
+  name: "NInertiaDataTable",
+  components: {
+    NLaravelDataTable,
+  },
   props: {
     columns: {
-      type: Array as PropType<LaravelDataTableColumn[]>,
+      type: Array as PropType<LaravelDataTableColumns>,
       required: true,
     },
     paginationData: {
       type: Object as PropType<LaravelPagination>,
       required: true,
     },
-  },
-  components: {
-    NLaravelDataTable,
   },
   setup() {
     const adaptor = useInertiaAdaptor;

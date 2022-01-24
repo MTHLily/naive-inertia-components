@@ -1,8 +1,7 @@
 import { PropType } from "vue";
-import route from "ziggy-js";
 import { RouteAdaptorComposition } from "../../Adaptors";
 import { LaravelPagination } from "../../Pagination";
-import { LaravelDataTableColumns } from "..";
+import { LaravelDataTableColumns } from "./interface";
 declare const _default: import("vue").DefineComponent<{
     columns: {
         type: PropType<LaravelDataTableColumns<unknown>>;
@@ -36,7 +35,6 @@ declare const _default: import("vue").DefineComponent<{
         handleDateRangeFilter: import("./interface").OnFilterDateRange;
         handleSort: import("./interface").OnHandleSort;
     };
-    route: typeof route;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     columns: {
         type: PropType<LaravelDataTableColumns<unknown>>;
@@ -55,7 +53,7 @@ declare const _default: import("vue").DefineComponent<{
         default: boolean;
     };
 }>>, {
-    loading: boolean;
     adaptor: RouteAdaptorComposition;
+    loading: boolean;
 }>;
 export default _default;

@@ -4,8 +4,8 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { LaravelPagination } from "..";
-import { useInertiaAdaptor } from "../..";
+import { LaravelPagination } from "./interface";
+import { useInertiaAdaptor } from "../../Adaptors";
 import NLaravelPagination from "./NLaravelPagination.vue";
 
 export default defineComponent({

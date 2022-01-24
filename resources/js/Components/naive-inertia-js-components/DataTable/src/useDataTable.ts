@@ -1,16 +1,17 @@
-import { ComputedRef, ref, Ref, watch } from "vue";
+import _ from "lodash";
+import {
+  FilterOptionValue,
+  OnUpdateFilters,
+} from "naive-ui/lib/data-table/src/interface";
+import { ref, Ref, watch } from "vue";
+import { RouteAdaptor } from "../../Adaptors";
+import { LaravelPagination } from "../../Pagination";
 import {
   LaravelDataTableColumn,
   OnFilterDateRange,
   OnFilterText,
   OnHandleSort,
-} from "..";
-import { LaravelPagination, RouteAdaptor } from "../..";
-import {
-  FilterOptionValue,
-  OnUpdateFilters,
-} from "naive-ui/lib/data-table/src/interface";
-import _ from "lodash";
+} from "./interface";
 
 type LaravelDataTableComposable = (
   paginationData: LaravelPagination,

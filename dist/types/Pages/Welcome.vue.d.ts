@@ -1,4 +1,4 @@
-import { LaravelPagination } from "@/Components/naive-inertia-js-components";
+import { LaravelDataTableColumns, LaravelPagination } from "@/Components/naive-inertia-js-components";
 import { User } from "@/Types/models";
 import { PropType } from "vue";
 declare const _default: import("vue").DefineComponent<{
@@ -15,13 +15,17 @@ declare const _default: import("vue").DefineComponent<{
         email: string;
         email_verified_at: string;
         created_at: string;
+        password?: string | undefined;
+        password_confirmation?: string | undefined;
         isDirty: boolean;
         errors: {
+            password: string;
             id: string;
             name: string;
             email: string;
             email_verified_at: string;
             created_at: string;
+            password_confirmation: string;
         };
         hasErrors: boolean;
         processing: boolean;
@@ -30,10 +34,25 @@ declare const _default: import("vue").DefineComponent<{
         } | null;
         wasSuccessful: boolean;
         recentlySuccessful: boolean;
-        data: () => User;
-        transform: (callback: (data: User) => object) => import("@inertiajs/inertia-vue3").InertiaForm<User>;
-        reset: (...fields: (keyof User)[]) => import("@inertiajs/inertia-vue3").InertiaForm<User>;
-        clearErrors: (...fields: (keyof User)[]) => import("@inertiajs/inertia-vue3").InertiaForm<User>;
+        data: () => User & {
+            password?: string | undefined;
+            password_confirmation?: string | undefined;
+        };
+        transform: (callback: (data: User & {
+            password?: string | undefined;
+            password_confirmation?: string | undefined;
+        }) => object) => import("@inertiajs/inertia-vue3").InertiaForm<User & {
+            password?: string | undefined;
+            password_confirmation?: string | undefined;
+        }>;
+        reset: (...fields: ("password" | "password_confirmation" | keyof User)[]) => import("@inertiajs/inertia-vue3").InertiaForm<User & {
+            password?: string | undefined;
+            password_confirmation?: string | undefined;
+        }>;
+        clearErrors: (...fields: ("password" | "password_confirmation" | keyof User)[]) => import("@inertiajs/inertia-vue3").InertiaForm<User & {
+            password?: string | undefined;
+            password_confirmation?: string | undefined;
+        }>;
         submit: (method: string, url: string, options?: Partial<Partial<import("@inertiajs/inertia").Visit & {
             onCancelToken: ({ cancel }: {
                 cancel: VoidFunction;
@@ -110,7 +129,7 @@ declare const _default: import("vue").DefineComponent<{
     }>;
     routeValue: string;
     table: {
-        columns: LaravelDataTableColumn[];
+        columns: LaravelDataTableColumns<unknown>;
     };
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     users: {

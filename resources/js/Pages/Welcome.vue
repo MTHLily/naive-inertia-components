@@ -28,7 +28,7 @@
 <script lang="ts">
 import {
   NInertiaFormItem,
-  LaravelDataTableColumn,
+  LaravelDataTableColumns,
   LaravelPagination,
 } from "@/Components/naive-inertia-js-components";
 
@@ -57,7 +57,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const columns = <LaravelDataTableColumn[]>[
+    const columns = <LaravelDataTableColumns>[
       {
         key: "id",
         title: "ID",
@@ -79,7 +79,11 @@ export default defineComponent({
     const { generateFormSubmssionEvent, generateModelForm } =
       useInertiaFormHelper();
 
-    const toModelForm = (generateModelForm as ModelFormGenerator<User>)({
+    const toModelForm = (
+      generateModelForm as ModelFormGenerator<
+        User & { password?: string; password_confirmation?: string }
+      >
+    )({
       simpleKeys: ["id", "name", "email"],
       complexKeys: {
         created_at: {

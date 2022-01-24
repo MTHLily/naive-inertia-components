@@ -1,7 +1,7 @@
 import { RouteAdaptor } from "../../Adaptors";
 import { PaginationProps } from "naive-ui";
-import { computed, reactive, ref, Ref, toRef } from "vue";
-import { LaravelPagination } from "..";
+import { computed, Ref } from "vue";
+import { LaravelPagination } from "./interface";
 
 export const useLaravelPagination = (
   paginationData: LaravelPagination,

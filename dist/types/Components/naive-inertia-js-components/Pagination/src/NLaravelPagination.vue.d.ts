@@ -1,5 +1,5 @@
 import { PropType, Ref } from "vue";
-import { RouteAdaptorComposition } from "../../Adaptors/interface";
+import { RouteAdaptorComposition } from "../../Adaptors";
 import { LaravelPagination } from "./interface";
 declare const _default: import("vue").DefineComponent<{
     paginationData: {

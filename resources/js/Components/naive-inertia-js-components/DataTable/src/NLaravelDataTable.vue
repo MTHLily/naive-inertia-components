@@ -30,14 +30,13 @@
 <script lang="ts">
 import { NDataTable, NDatePicker, NInput, NInputGroup, NSpace } from "naive-ui";
 import { computed, defineComponent, PropType, ref } from "vue";
-import route from "ziggy-js";
 import { RouteAdaptorComposition, useDefaultAdaptor } from "../../Adaptors";
 import { LaravelPagination, useLaravelPagination } from "../../Pagination";
-import { LaravelDataTableColumns } from "..";
+import { LaravelDataTableColumns } from "./interface";
 import { useLaravelDataTable } from "./useDataTable";
 
 export default defineComponent({
-  name: "LaravelDataTable",
+  name: "NLaravelDataTable",
   components: {
     NDataTable,
     NSpace,
@@ -87,7 +86,6 @@ export default defineComponent({
       handleTextFilterUpdate,
       pagination,
       datatable,
-      route,
     };
   },
 });
