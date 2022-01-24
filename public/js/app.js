@@ -20794,7 +20794,7 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var naive_ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! naive-ui */ "./node_modules/naive-ui/es/form/src/FormItem.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var ___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! .. */ "./resources/js/Components/naive-inertia-js-components/FormItem/src/useInertiaFormItem.ts");
+/* harmony import */ var _useInertiaFormItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./useInertiaFormItem */ "./resources/js/Components/naive-inertia-js-components/FormItem/src/useInertiaFormItem.ts");
 
 
 
@@ -20819,7 +20819,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   setup: function setup(props) {
-    var _useInertiaFormItem = (0,___WEBPACK_IMPORTED_MODULE_2__.useInertiaFormItem)(),
+    var _useInertiaFormItem = (0,_useInertiaFormItem__WEBPACK_IMPORTED_MODULE_2__.useInertiaFormItem)(),
         getFormErrors = _useInertiaFormItem.getFormErrors;
 
     var errors = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
@@ -20842,7 +20842,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_naive_inertia_js_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Components/naive-inertia-js-components */ "./resources/js/Components/naive-inertia-js-components/FormItem/src/InertiaFormItem.vue");
-/* harmony import */ var _Components_naive_inertia_js_components_Helpers_useFormHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Components/naive-inertia-js-components/Helpers/useFormHelper */ "./resources/js/Components/naive-inertia-js-components/Helpers/useFormHelper.ts");
+/* harmony import */ var _Components_naive_inertia_js_components_Helpers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Components/naive-inertia-js-components/Helpers */ "./resources/js/Components/naive-inertia-js-components/Helpers/useFormHelper.ts");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 /* harmony import */ var naive_ui__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! naive-ui */ "./node_modules/naive-ui/es/form/src/Form.js");
 /* harmony import */ var naive_ui__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! naive-ui */ "./node_modules/naive-ui/es/input/src/Input.js");
@@ -20890,7 +20890,7 @@ __webpack_require__.r(__webpack_exports__);
       filterType: "daterange"
     }];
 
-    var _useInertiaFormHelper = (0,_Components_naive_inertia_js_components_Helpers_useFormHelper__WEBPACK_IMPORTED_MODULE_8__.useInertiaFormHelper)(),
+    var _useInertiaFormHelper = (0,_Components_naive_inertia_js_components_Helpers__WEBPACK_IMPORTED_MODULE_8__.useInertiaFormHelper)(),
         generateFormSubmssionEvent = _useInertiaFormHelper.generateFormSubmssionEvent,
         generateModelForm = _useInertiaFormHelper.generateModelForm;
 
@@ -20900,9 +20900,6 @@ __webpack_require__.r(__webpack_exports__);
         created_at: {
           get: function get() {
             return new Date();
-          },
-          set: function set(model) {
-            return new Date(model.created_at);
           }
         }
       }
@@ -21088,8 +21085,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }, 8
       /* PROPS */
       , ["form"]), (0,vue__WEBPACK_IMPORTED_MODULE_1__.createVNode)(_component_n_button, {
-        onClick: _ctx.handleSubmit,
-        loading: _ctx.processing
+        loading: _ctx.processing,
+        onClick: _ctx.handleSubmit
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_1__.withCtx)(function () {
           return [_hoisted_1];
@@ -21099,7 +21096,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }, 8
       /* PROPS */
-      , ["onClick", "loading"])];
+      , ["loading", "onClick"])];
     }),
     _: 1
     /* STABLE */
@@ -88672,7 +88669,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunknaive_inertia_js_components"] = self["webpackChunknaive_inertia_js_components"] || [];
+/******/ 		var chunkLoadingGlobal = self["webpackChunknaive_inertia_components"] = self["webpackChunknaive_inertia_components"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	}();

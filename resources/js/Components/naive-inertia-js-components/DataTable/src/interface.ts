@@ -1,6 +1,10 @@
 import { DataTableColumn } from "naive-ui";
 import { SortState } from "naive-ui/lib/data-table/src/interface";
 
+/**
+ * Wrapper around the Laravel pagination object.
+ * Specify the model using <Model>
+ */
 export type LaravelDataTableColumn<T = unknown> = {
   key: string;
   sortOrder?: "ascend" | "descend" | null;
@@ -12,6 +16,8 @@ export type LaravelDataTableColumn<T = unknown> = {
   filterType: "text" | "daterange";
   title?: string;
 } & DataTableColumn;
+
+export type LaravelDataTableColumns<T = unknown> = LaravelDataTableColumn<T>[];
 
 export type OnFilterText = (filterColumn: LaravelDataTableColumn) => void;
 export type OnFilterDateRange = (filterColumn: LaravelDataTableColumn) => void;

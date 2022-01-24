@@ -1,11 +1,10 @@
-import { PropType, Ref } from "vue";
+import { PropType } from "vue";
 import route from "ziggy-js";
-import { RouteAdaptorComposition } from "../../Adaptors/interface";
-import { LaravelPagination } from "../../Pagination/src/interface";
-import { LaravelDataTableColumn } from "./interface";
+import { LaravelPagination } from "../../Pagination";
+import { LaravelDataTableColumns } from "..";
 declare const _default: import("vue").DefineComponent<{
     columns: {
-        type: PropType<LaravelDataTableColumn<unknown>[]>;
+        type: PropType<LaravelDataTableColumns<unknown>>;
         required: true;
     };
     paginationData: {
@@ -14,7 +13,7 @@ declare const _default: import("vue").DefineComponent<{
     };
     adaptor: {
         type: PropType<RouteAdaptorComposition>;
-        default: () => RouteAdaptorComposition;
+        default: () => import("../../Adaptors/interface").RouteAdaptorComposition;
     };
     loading: {
         type: BooleanConstructor;
@@ -22,25 +21,12 @@ declare const _default: import("vue").DefineComponent<{
     };
 }, {
     handleTextFilterUpdate: (value: any) => void;
-    pagination: import("vue").ComputedRef<{
-        handlePageChange: (page: number) => void;
-        handlePageSizeChange: (perPage: number) => void;
-        paginationProps: import("vue").ComputedRef<import("naive-ui").PaginationProps>;
-        loading: Ref<boolean> | undefined;
-    }>;
-    datatable: {
-        columns: Ref<LaravelDataTableColumn<unknown>[]>;
-        filterColumns: LaravelDataTableColumn<unknown>[];
-        handleCheckFilter: import("naive-ui/lib/data-table/src/interface").OnUpdateFilters;
-        handleTextFilter: import("./interface").OnFilterText;
-        handleDateRangeFilter: import("./interface").OnFilterDateRange;
-        handleSort: import("./interface").OnHandleSort;
-    };
+    pagination: import("vue").ComputedRef<any>;
+    datatable: any;
     route: typeof route;
-    loading: Ref<boolean>;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     columns: {
-        type: PropType<LaravelDataTableColumn<unknown>[]>;
+        type: PropType<LaravelDataTableColumns<unknown>>;
         required: true;
     };
     paginationData: {
@@ -49,7 +35,7 @@ declare const _default: import("vue").DefineComponent<{
     };
     adaptor: {
         type: PropType<RouteAdaptorComposition>;
-        default: () => RouteAdaptorComposition;
+        default: () => import("../../Adaptors/interface").RouteAdaptorComposition;
     };
     loading: {
         type: BooleanConstructor;

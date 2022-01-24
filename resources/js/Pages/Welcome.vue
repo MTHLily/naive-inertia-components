@@ -1,5 +1,5 @@
 <template>
-  <Head title="Welcome"> </Head>
+  <Head title="Welcome" />
   <!-- <n-inertia-data-table :pagination-data="users" :columns="table.columns" /> -->
   <package-table :pagination-data="users" :columns="table.columns" />
   <n-form>
@@ -19,7 +19,7 @@
     >
       <n-input v-model:value="form.password_confirmation" type="password" />
     </n-inertia-form-item>
-    <n-button @click="handleSubmit" :loading="processing">Submit</n-button>
+    <n-button :loading="processing" @click="handleSubmit">Submit</n-button>
   </n-form>
   <pre>{{ users }}</pre>
   <div>Hello World!</div>
@@ -32,12 +32,10 @@ import {
   LaravelPagination,
 } from "@/Components/naive-inertia-js-components";
 
-import {
-  useInertiaFormHelper,
-  ModelFormGenerator,
-} from "@/Components/naive-inertia-js-components/Helpers/useFormHelper";
+import { ModelFormGenerator } from "@/Components/naive-inertia-js-components/Helpers/useFormHelper";
+import { useInertiaFormHelper } from "@/Components/naive-inertia-js-components/Helpers";
 import { User } from "@/Types/models";
-import { Head, useForm } from "@inertiajs/inertia-vue3";
+import { Head } from "@inertiajs/inertia-vue3";
 import { NButton, NForm, NInput } from "naive-ui";
 import { defineComponent, PropType, ref } from "vue";
 import route from "ziggy-js";

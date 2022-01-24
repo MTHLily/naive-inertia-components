@@ -23,27 +23,31 @@
       :data="paginationData.data"
       :pagination="pagination.paginationProps.value"
       :on-update:sorter="datatable.handleSort"
-    ></n-data-table>
+    />
   </n-space>
-  {{ datatable.columns }}
 </template>
 
 <script lang="ts">
-import { NDataTable, NSpace, NInputGroup, NInput, NDatePicker } from "naive-ui";
-import { computed, defineComponent, PropType, reactive, Ref, ref } from "vue";
+import { NDataTable, NDatePicker, NInput, NInputGroup, NSpace } from "naive-ui";
+import { computed, defineComponent, PropType, ref } from "vue";
 import route from "ziggy-js";
-import { RouteAdaptorComposition } from "../../Adaptors/interface";
-import { useDefaultAdaptor } from "../../Adaptors/useDefaultAdaptor";
-import { LaravelPagination } from "../../Pagination/src/interface";
-import { useLaravelPagination } from "../../Pagination/src/usePagination";
-import { LaravelDataTableColumn } from "./interface";
-import { useLaravelDataTable } from "./useDataTable";
+import { RouteAdaptorComposition, useDefaultAdaptor } from "../../Adaptors";
+import { LaravelPagination, useLaravelPagination } from "../../Pagination";
+import { LaravelDataTableColumns } from "..";
+import { useLaravelDataTable } from "..";
 
 export default defineComponent({
   name: "LaravelDataTable",
+  components: {
+    NDataTable,
+    NSpace,
+    NInputGroup,
+    NInput,
+    NDatePicker,
+  },
   props: {
     columns: {
-      type: Array as PropType<LaravelDataTableColumn[]>,
+      type: Array as PropType<LaravelDataTableColumns>,
       required: true,
     },
     paginationData: {
@@ -60,13 +64,6 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
-  },
-  components: {
-    NDataTable,
-    NSpace,
-    NInputGroup,
-    NInput,
-    NDatePicker,
   },
   setup(props) {
     const loading = ref(props.loading);
@@ -91,7 +88,6 @@ export default defineComponent({
       pagination,
       datatable,
       route,
-      loading,
     };
   },
 });

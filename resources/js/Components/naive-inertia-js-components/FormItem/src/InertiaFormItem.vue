@@ -12,7 +12,7 @@
 import { InertiaForm } from "@inertiajs/inertia-vue3";
 import { NFormItem } from "naive-ui";
 import { computed, defineComponent, PropType } from "vue";
-import { useInertiaFormItem } from "..";
+import { useInertiaFormItem } from "./useInertiaFormItem";
 
 export default defineComponent({
   components: {
