@@ -1,8 +1,8 @@
-import { NDataTable, NSpace, NInputGroup, NInput, NDatePicker, NPagination, NFormItem } from 'naive-ui';
-import { computed, ref, watch, defineComponent, resolveComponent, openBlock, createElementBlock, Fragment, createVNode, withCtx, renderList, createBlock, createCommentVNode, createTextVNode, toDisplayString, normalizeProps, guardReactiveProps, renderSlot } from 'vue';
-import route from 'ziggy-js';
+import { ref, computed, defineComponent, resolveComponent, openBlock, createBlock, normalizeProps, guardReactiveProps, watch, withCtx, createVNode, createElementBlock, Fragment, renderList, createCommentVNode, renderSlot } from 'vue';
+import { NPagination, NDataTable, NSpace, NInputGroup, NInput, NDatePicker, NFormItem } from 'naive-ui';
 import _ from 'lodash';
 import { Inertia, Method } from '@inertiajs/inertia';
+import route from 'ziggy-js';
 import { useForm } from '@inertiajs/inertia-vue3';
 
 const useDefaultAdaptor = () => {
@@ -19,6 +19,37 @@ const useDefaultAdaptor = () => {
     return {
       filter: "hello"
     };
+  };
+
+  return {
+    visit,
+    getQuery
+  };
+};
+
+const useInertiaAdaptor = function () {
+  let loading = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ref(false);
+
+  const visit = function (path, query) {
+    let options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {
+      resetPage: true,
+      preserveScroll: true,
+      preserveState: true
+    };
+    if (options.resetPage && query.page) query.page = 1;
+    Inertia.visit(path, {
+      data: query,
+      preserveScroll: options.preserveScroll,
+      preserveState: options.preserveState,
+      replace: true,
+      onFinish: () => {
+        loading.value = false;
+      }
+    });
+  };
+
+  const getQuery = () => {
+    return route().params;
   };
 
   return {
@@ -61,6 +92,75 @@ const useLaravelPagination = (paginationData, adaptor, loading, overrides) => {
   };
 };
 
+var script$4 = defineComponent({
+  components: {
+    NPagination
+  },
+  props: {
+    paginationData: {
+      type: Object,
+      required: true
+    },
+    adaptor: {
+      type: Object,
+      required: true
+    },
+    loading: {
+      type: Object,
+      default: () => ref(false)
+    }
+  },
+
+  setup(props) {
+    const {
+      paginationProps
+    } = useLaravelPagination(props.paginationData, props.adaptor(), props.loading);
+    return {
+      paginationProps
+    };
+  }
+
+});
+
+function render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_n_pagination = resolveComponent("n-pagination");
+
+  return openBlock(), createBlock(_component_n_pagination, normalizeProps(guardReactiveProps(_ctx.paginationProps)), null, 16);
+}
+
+script$4.render = render$4;
+
+var script$3 = defineComponent({
+  components: {
+    NLaravelPagination: script$4
+  },
+  props: {
+    paginationData: {
+      type: Object,
+      required: true
+    }
+  },
+
+  setup() {
+    const adaptor = useInertiaAdaptor;
+    return {
+      adaptor
+    };
+  }
+
+});
+
+function render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_n_laravel_pagination = resolveComponent("n-laravel-pagination");
+
+  return openBlock(), createBlock(_component_n_laravel_pagination, {
+    "pagination-data": _ctx.paginationData,
+    adaptor: _ctx.adaptor
+  }, null, 8, ["pagination-data", "adaptor"]);
+}
+
+script$3.render = render$3;
+
 const useLaravelDataTable = function (paginationData, unprocessedColumns, adaptor) {
   let loading = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : ref(false);
 
@@ -75,6 +175,10 @@ const useLaravelDataTable = function (paginationData, unprocessedColumns, adapto
       if (query.sort?.split("-").includes(column.key)) {
         if (query.sort.charAt(0) == "-") values.sortOrder = "descend";else values.sortOrder = "ascend";
       }
+    }
+
+    if (column.filterType === "check") {
+      values.filter = true;
     }
 
     if (column.filterType === "text") {
@@ -153,8 +257,15 @@ const useLaravelDataTable = function (paginationData, unprocessedColumns, adapto
   };
 };
 
-var script$3 = defineComponent({
-  name: "LaravelDataTable",
+var script$2 = defineComponent({
+  name: "NLaravelDataTable",
+  components: {
+    NDataTable,
+    NSpace,
+    NInputGroup,
+    NInput,
+    NDatePicker
+  },
   props: {
     columns: {
       type: Array,
@@ -175,36 +286,21 @@ var script$3 = defineComponent({
       default: false
     }
   },
-  components: {
-    NDataTable,
-    NSpace,
-    NInputGroup,
-    NInput,
-    NDatePicker
-  },
 
   setup(props) {
     const loading = ref(props.loading);
     const adaptor = props.adaptor(loading);
     const pagination = computed(() => useLaravelPagination(props.paginationData, adaptor, loading));
     const datatable = useLaravelDataTable(props.paginationData, props.columns, adaptor, loading);
-
-    const handleTextFilterUpdate = value => {
-      console.log(value);
-    };
-
     return {
-      handleTextFilterUpdate,
       pagination,
-      datatable,
-      route,
-      loading
+      datatable
     };
   }
 
 });
 
-function render$3(_ctx, _cache, $props, $setup, $data, $options) {
+function render$2(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_n_input = resolveComponent("n-input");
 
   const _component_n_date_picker = resolveComponent("n-date-picker");
@@ -215,7 +311,7 @@ function render$3(_ctx, _cache, $props, $setup, $data, $options) {
 
   const _component_n_space = resolveComponent("n-space");
 
-  return openBlock(), createElementBlock(Fragment, null, [createVNode(_component_n_space, {
+  return openBlock(), createBlock(_component_n_space, {
     vertical: ""
   }, {
     default: withCtx(() => [createVNode(_component_n_input_group, null, {
@@ -243,53 +339,20 @@ function render$3(_ctx, _cache, $props, $setup, $data, $options) {
       columns: _ctx.datatable.columns.value,
       data: _ctx.paginationData.data,
       pagination: _ctx.pagination.paginationProps.value,
-      "on-update:sorter": _ctx.datatable.handleSort
-    }, null, 8, ["loading", "columns", "data", "pagination", "on-update:sorter"])]),
+      "on-update:sorter": _ctx.datatable.handleSort,
+      "on-update:filters": _ctx.datatable.handleCheckFilter
+    }, null, 8, ["loading", "columns", "data", "pagination", "on-update:sorter", "on-update:filters"])]),
     _: 1
-  }), createTextVNode(" " + toDisplayString(_ctx.datatable.columns), 1)], 64);
+  });
 }
 
-script$3.render = render$3;
+script$2.render = render$2;
 
-const useInertiaAdaptor = function () {
-  let loading = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ref(false);
-
-  const visit = function (path, query) {
-    let options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {
-      resetPage: true,
-      preserveScroll: true,
-      preserveState: true
-    };
-    if (options.resetPage && query.page) query.page = 1;
-    Inertia.visit(path, {
-      data: query,
-      preserveScroll: options.preserveScroll,
-      preserveState: options.preserveState,
-      replace: true,
-      onFinish: () => {
-        loading.value = false;
-      }
-    });
-  };
-
-  const getQuery = () => {
-    const query = window.location.search.substring(1).split("&").map(queryPart => queryPart.split("=")).reduce((carry, queryPart) => {
-      const queryPair = {};
-      queryPair[queryPart[0]] = queryPart[1];
-      return Object.assign(carry, queryPair);
-    }, {});
-    console.log(route().params, query);
-    return route().params;
-  };
-
-  return {
-    visit,
-    getQuery
-  };
-};
-
-var script$2 = defineComponent({
-  name: "LaravelDataTable",
+var script$1 = defineComponent({
+  name: "NInertiaDataTable",
+  components: {
+    NLaravelDataTable: script$2
+  },
   props: {
     columns: {
       type: Array,
@@ -299,9 +362,6 @@ var script$2 = defineComponent({
       type: Object,
       required: true
     }
-  },
-  components: {
-    NLaravelDataTable: script$3
   },
 
   setup() {
@@ -313,7 +373,7 @@ var script$2 = defineComponent({
 
 });
 
-function render$2(_ctx, _cache, $props, $setup, $data, $options) {
+function render$1(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_n_laravel_data_table = resolveComponent("n-laravel-data-table");
 
   return openBlock(), createBlock(_component_n_laravel_data_table, {
@@ -323,45 +383,35 @@ function render$2(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8, ["columns", "pagination-data", "adaptor"]);
 }
 
-script$2.render = render$2;
-
-var script$1 = defineComponent({
-  components: {
-    NPagination
-  },
-  props: {
-    paginationData: {
-      type: Object,
-      required: true
-    },
-    adaptor: {
-      type: Object,
-      required: true
-    },
-    loading: {
-      type: Object,
-      default: () => ref(false)
-    }
-  },
-
-  setup(props) {
-    const {
-      paginationProps
-    } = useLaravelPagination(props.paginationData, props.adaptor(), props.loading);
-    return {
-      paginationProps
-    };
-  }
-
-});
-
-function render$1(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_n_pagination = resolveComponent("n-pagination");
-
-  return openBlock(), createBlock(_component_n_pagination, normalizeProps(guardReactiveProps(_ctx.paginationProps)), null, 16);
-}
-
 script$1.render = render$1;
+
+const useInertiaFormItem = () => {
+  const getFormErrors = (form, primaryKey, secondaryKeys) => {
+    const status = {};
+
+    if (form.errors[primaryKey]) {
+      status.status = "error";
+      status.message = form.errors[primaryKey];
+      return status;
+    }
+
+    if (!Array.isArray(form[primaryKey])) return status;
+    const length = form[primaryKey]?.length;
+
+    for (let x = 0; x < length; x++) for (let y = 0; y < secondaryKeys.length; y++) if (form.errors[`${primaryKey}.${x}.${secondaryKeys[y]}`]) {
+      status.status = "error";
+      status.message = form.errors[`${primaryKey}.${x}.${secondaryKeys[y]}`];
+      status.index = x;
+      return status;
+    }
+
+    return status;
+  };
+
+  return {
+    getFormErrors
+  };
+};
 
 var script = defineComponent({
   components: {
@@ -409,33 +459,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 script.render = render;
 
-const useInertiaFormItem = () => {
-  const getFormErrors = (form, primaryKey, secondaryKeys) => {
-    const status = {};
-
-    if (form.errors[primaryKey]) {
-      status.status = "error";
-      status.message = form.errors[primaryKey];
-      return status;
-    }
-
-    if (!Array.isArray(form[primaryKey])) return status;
-    const length = form[primaryKey]?.length;
-
-    for (let x = 0; x < length; x++) for (let y = 0; y < secondaryKeys.length; y++) if (form.errors[`${primaryKey}.${x}.${secondaryKeys[y]}`]) {
-      status.status = "error";
-      status.message = form.errors[`${primaryKey}.${x}.${secondaryKeys[y]}`];
-      status.index = x;
-      return status;
-    }
-
-    return status;
-  };
-
-  return {
-    getFormErrors
-  };
-};
+var components = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  NInertiaDataTable: script$1,
+  NLaravelDataTable: script$2,
+  NInertiaPagination: script$3,
+  NLaravelPagination: script$4,
+  NInertiaFormItem: script
+});
 
 const useInertiaFormHelper = () => {
   const generateFormSubmssionEvent = function (form, submitRoute) {
@@ -502,18 +533,6 @@ const useInertiaFormHelper = () => {
   };
 };
 
-var components = /*#__PURE__*/Object.freeze({
-  __proto__: null,
-  NLaravelDataTable: script$3,
-  NInertiaDataTable: script$2,
-  NLaravelPagination: script$1,
-  useDefaultAdaptor: useDefaultAdaptor,
-  useInertiaAdaptor: useInertiaAdaptor,
-  NInertiaFormItem: script,
-  useInertiaFormItem: useInertiaFormItem,
-  useInertiaFormHelper: useInertiaFormHelper
-});
-
 // Import vue components
 
 const install = function installMthlilyNaiveInertiaJsComponents(app) {
@@ -523,4 +542,4 @@ const install = function installMthlilyNaiveInertiaJsComponents(app) {
   });
 }; // Create module definition for Vue.use()
 
-export { script$2 as NInertiaDataTable, script as NInertiaFormItem, script$3 as NLaravelDataTable, script$1 as NLaravelPagination, install as default, useDefaultAdaptor, useInertiaAdaptor, useInertiaFormHelper, useInertiaFormItem };
+export { script$1 as NInertiaDataTable, script as NInertiaFormItem, script$3 as NInertiaPagination, script$2 as NLaravelDataTable, script$4 as NLaravelPagination, install as default, useDefaultAdaptor, useInertiaAdaptor, useInertiaFormHelper, useInertiaFormItem, useLaravelPagination };

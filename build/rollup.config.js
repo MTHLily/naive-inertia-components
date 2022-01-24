@@ -66,7 +66,13 @@ const baseConfig = {
       commonjs(),
     ],
     babel: {
-      exclude: "node_modules/**",
+      exclude: [
+        "node_modules/**",
+        "**/app.ts",
+        "Pages/**",
+        "Types/**",
+        "Layouts/**",
+      ],
       extensions: [".js", ".jsx", ".ts", ".tsx", ".vue"],
       babelHelpers: "bundled",
     },
@@ -79,6 +85,10 @@ const external = [
   // list external dependencies, exactly the way it is written in the import statement.
   // eg. 'jquery'
   "vue",
+  "naive-ui",
+  "@inertiajs/inertia",
+  "@inertiajs/inertia-vue3",
+  "ziggy-js",
 ];
 
 // UMD/IIFE shared settings: output.globals

@@ -1,7 +1,7 @@
 import { App, Plugin } from "vue";
 
 // Import vue components
-import * as components from "@/Components/naive-inertia-js-components/index";
+import * as components from "@/Components/naive-inertia-js-components/components";
 
 // install function executed by Vue.use()
 const install: Exclude<Plugin["install"], undefined> =

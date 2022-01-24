@@ -1,6 +1,6 @@
 {
     "name": "naive-inertia-components",
-    "version": "0.0.2",
+    "version": "0.0.5",
     "description": "A Naive UI-to-Laravel Adaptor.",
     "main": "dist/mthlily-naive-inertia-js-components.ssr.js",
     "browser": "dist/mthlily-naive-inertia-js-components.esm.js",
@@ -8,8 +8,9 @@
     "unpkg": "dist/mthlily-naive-inertia-js-components.min.js",
     "types": "dist/types/src/entry.esm.d.ts",
     "files": [
-        "./dist/*",
-        "./resources/js/Components/*"
+        "dist/*",
+        "resources/js/Components/*",
+        "index.d.ts"
     ],
     "sideEffects": false,
     "scripts": {
@@ -62,6 +63,7 @@
         "postcss-import": "^14.0.1",
         "rimraf": "^3.0.2",
         "rollup": "^2.52.8",
+        "rollup-plugin-multi-input": "^1.3.1",
         "rollup-plugin-node-externals": "^3.1.2",
         "rollup-plugin-postcss": "^4.0.0",
         "rollup-plugin-terser": "^7.0.2",
@@ -80,5 +82,8 @@
         "naive-ui": "^2.24.1",
         "vue": "^3.0.5",
         "ziggy-js": "^1.4.2"
+    },
+    "dependencies": {
+        "naive-inertia-components": "file:naive-inertia-components-0.0.4.tgz"
     }
 }

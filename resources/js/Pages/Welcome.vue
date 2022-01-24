@@ -27,11 +27,15 @@
 
 <script lang="ts">
 import {
-  NInertiaDataTable as PackageTable,
+  NInertiaDataTable,
   NInertiaFormItem,
+} from "@/Components/naive-inertia-js-components";
+import {
   LaravelDataTableColumns,
   LaravelPagination,
 } from "@/Components/naive-inertia-js-components";
+
+import { NInertiaDataTable as PackageTable } from "naive-inertia-components";
 
 import { ModelFormGenerator } from "@/Components/naive-inertia-js-components/Helpers/useFormHelper";
 import { useInertiaFormHelper } from "@/Components/naive-inertia-js-components/Helpers";
