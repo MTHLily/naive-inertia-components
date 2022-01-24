@@ -47,6 +47,10 @@ export const useLaravelDataTable: LaravelDataTableComposable = (
       }
     }
 
+    if (column.filterType === "check") {
+      values.filter = true;
+    }
+
     if (column.filterType === "text") {
       const query = adaptor.getQuery();
       if (query.filter && query.filter[column.key])

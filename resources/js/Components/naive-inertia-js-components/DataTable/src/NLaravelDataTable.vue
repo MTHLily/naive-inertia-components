@@ -23,6 +23,7 @@
       :data="paginationData.data"
       :pagination="pagination.paginationProps.value"
       :on-update:sorter="datatable.handleSort"
+      :on-update:filters="datatable.handleCheckFilter"
     />
   </n-space>
 </template>
@@ -78,12 +79,7 @@ export default defineComponent({
       loading
     );
 
-    const handleTextFilterUpdate = (value) => {
-      console.log(value);
-    };
-
     return {
-      handleTextFilterUpdate,
       pagination,
       datatable,
     };

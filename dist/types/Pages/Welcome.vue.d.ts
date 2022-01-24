@@ -20,8 +20,8 @@ declare const _default: import("vue").DefineComponent<{
         isDirty: boolean;
         errors: {
             password: string;
-            id: string;
             name: string;
+            id: string;
             email: string;
             email_verified_at: string;
             created_at: string;

@@ -27,6 +27,7 @@
 
 <script lang="ts">
 import {
+  NInertiaDataTable as PackageTable,
   NInertiaFormItem,
   LaravelDataTableColumns,
   LaravelPagination,
@@ -39,7 +40,6 @@ import { Head } from "@inertiajs/inertia-vue3";
 import { NButton, NForm, NInput } from "naive-ui";
 import { defineComponent, PropType, ref } from "vue";
 import route from "ziggy-js";
-import { NInertiaDataTable as PackageTable } from "naive-inertia-js-components";
 
 export default defineComponent({
   components: {
@@ -62,6 +62,13 @@ export default defineComponent({
         key: "id",
         title: "ID",
         sorter: true,
+        filter: true,
+        filterOptions: [
+          {
+            label: "1",
+            value: 1,
+          },
+        ],
       },
       {
         key: "name",

@@ -33,16 +33,6 @@ export const useInertiaAdaptor = (
   };
 
   const getQuery: GetQueryFunction = () => {
-    const query = window.location.search
-      .substring(1)
-      .split("&")
-      .map((queryPart) => queryPart.split("="))
-      .reduce((carry, queryPart) => {
-        const queryPair = {};
-        queryPair[queryPart[0]] = queryPart[1];
-        return Object.assign(carry, queryPair);
-      }, {} as Query);
-    console.log(route().params, query);
     return route().params as Query;
   };
 

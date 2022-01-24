@@ -20,7 +20,6 @@ declare const _default: import("vue").DefineComponent<{
         default: boolean;
     };
 }, {
-    handleTextFilterUpdate: (value: any) => void;
     pagination: import("vue").ComputedRef<{
         handlePageChange: (page: number) => void;
         handlePageSizeChange: (perPage: number) => void;
@@ -53,7 +52,7 @@ declare const _default: import("vue").DefineComponent<{
         default: boolean;
     };
 }>>, {
-    adaptor: RouteAdaptorComposition;
     loading: boolean;
+    adaptor: RouteAdaptorComposition;
 }>;
 export default _default;

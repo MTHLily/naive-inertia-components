@@ -12,7 +12,8 @@ export declare type LaravelDataTableColumn<T = unknown> = {
     filterValue?: string | string[] | number | number[] | null;
     filterTextValue?: string | null;
     filterDateRangeValue?: [number, number] | null;
-    filterType: "text" | "daterange";
+    filterType: "text" | "daterange" | "check";
+    filter?: boolean;
     title?: string;
 } & DataTableColumn;
 export declare type LaravelDataTableColumns<T = unknown> = LaravelDataTableColumn<T>[];
