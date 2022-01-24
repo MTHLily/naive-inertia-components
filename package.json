@@ -1,5 +1,5 @@
 {
-    "name": "naive-inertia-js-components",
+    "name": "naive-inertia-components",
     "version": "0.0.2",
     "description": "A Naive UI-to-Laravel Adaptor.",
     "main": "dist/mthlily-naive-inertia-js-components.ssr.js",
