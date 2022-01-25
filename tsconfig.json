@@ -23,5 +23,9 @@
     "noImplicitAny": false // Bypass raising errors on `any` type
   },
   "exclude": ["node_modules", "public", "dist"],
-  "include": ["resources/js/**/*", "shims-vue.d.ts"] // Frontend paths pattern
+  "include": [
+    "resources/js/**/*",
+    "shims-vue.d.ts",
+    "src/naive-inertia-js-components"
+  ] // Frontend paths pattern
 }

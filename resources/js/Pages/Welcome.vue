@@ -35,7 +35,7 @@ import {
   LaravelPagination,
 } from "@/Components/naive-inertia-js-components";
 
-import { NInertiaDataTable as PackageTable } from "naive-inertia-components";
+import { NLaravelDataTable as PackageTable } from "naive-inertia-components";
 
 import { ModelFormGenerator } from "@/Components/naive-inertia-js-components/Helpers/useFormHelper";
 import { useInertiaFormHelper } from "@/Components/naive-inertia-js-components/Helpers";

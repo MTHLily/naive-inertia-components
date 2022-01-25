@@ -16,4 +16,4 @@ export default install;
 
 // To allow individual component use, export components
 // each can be registered via Vue.component()
-export * from "@/Components/naive-inertia-js-components/index";
+export * from "./naive-inertia-js-components/index";

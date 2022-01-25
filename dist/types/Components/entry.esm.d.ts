@@ -1,4 +1,4 @@
 import { Plugin } from "vue";
 declare const install: Exclude<Plugin["install"], undefined>;
 export default install;
-export * from "@/Components/naive-inertia-js-components/index";
+export * from "./naive-inertia-js-components/index";

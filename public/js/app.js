@@ -20896,7 +20896,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ((0,vue__WEBPACK_IMPORTED_MODULE_1__.defineComponent)({
   components: {
-    PackageTable: naive_inertia_components__WEBPACK_IMPORTED_MODULE_3__.NInertiaDataTable,
+    PackageTable: naive_inertia_components__WEBPACK_IMPORTED_MODULE_3__.NLaravelDataTable,
     NInertiaFormItem: _Components_naive_inertia_js_components__WEBPACK_IMPORTED_MODULE_4__["default"],
     Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_0__.Head,
     NForm: naive_ui__WEBPACK_IMPORTED_MODULE_5__["default"],
