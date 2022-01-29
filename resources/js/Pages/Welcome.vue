@@ -27,7 +27,7 @@
 
 <script lang="ts">
 import {
-  NInertiaDataTable,
+  NInertiaDataTable as PackageTable,
   NInertiaFormItem,
 } from "@/Components/naive-inertia-js-components";
 import {
@@ -35,9 +35,8 @@ import {
   LaravelPagination,
 } from "@/Components/naive-inertia-js-components";
 
-import { NLaravelDataTable as PackageTable } from "naive-inertia-components";
+// import { NLaravelDataTable as PackageTable } from "naive-inertia-components";
 
-import { ModelFormGenerator } from "@/Components/naive-inertia-js-components/Helpers/useFormHelper";
 import { useInertiaFormHelper } from "@/Components/naive-inertia-js-components/Helpers";
 import { User } from "@/Types/models";
 import { Head } from "@inertiajs/inertia-vue3";
@@ -90,16 +89,14 @@ export default defineComponent({
     const { generateFormSubmssionEvent, generateModelForm } =
       useInertiaFormHelper();
 
-    const toModelForm = (
-      generateModelForm as ModelFormGenerator<
-        User & { password?: string; password_confirmation?: string }
-      >
-    )({
+    const toModelForm = generateModelForm<
+      User & { password?: string; password_confirmation?: string }
+    >({
       simpleKeys: ["id", "name", "email"],
       complexKeys: {
         created_at: {
           get: () => {
-            return new Date();
+            return new Date().getTime();
           },
         },
       },

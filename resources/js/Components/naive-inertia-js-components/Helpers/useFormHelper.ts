@@ -3,24 +3,18 @@ import { InertiaForm, useForm } from "@inertiajs/inertia-vue3";
 import _ from "lodash";
 import { Ref, ref } from "vue";
 
-type ToModelForm<T = any> = (model?: T | null) => InertiaForm<T>;
+type ToModelForm<T> = (model: T | null) => InertiaForm<Partial<T>>;
 
-export type ModelFormGenerator<T = unknown> = (
-  args: ModelFormGeneratorArguments<T>
-) => ToModelForm<T>;
-
-type ModelFormSetter<T = unknown> = {
-  get: () => unknown;
-  set?: (model: T) => unknown | null;
+type ModelFormSetter<T> = {
+  get: () => T[keyof T];
+  set?: (model: T) => T[keyof T] | null;
 };
 
-type ComplexFormKeys<T = unknown> = Partial<
-  Record<keyof Partial<T>, ModelFormSetter<T>>
->;
+type ComplexFormKeys<T> = Partial<Record<keyof T, ModelFormSetter<T>>>;
 
-interface ModelFormGeneratorArguments<T = unknown> {
-  simpleKeys?: (keyof T)[];
-  complexKeys?: ComplexFormKeys<T>;
+interface ModelFormGeneratorArguments<T> {
+  simpleKeys?: Readonly<(keyof T)[]>;
+  complexKeys?: Readonly<ComplexFormKeys<T>>;
 }
 
 export const useInertiaFormHelper = () => {
@@ -62,40 +56,42 @@ export const useInertiaFormHelper = () => {
     return handleSubmit;
   };
 
-  const generateModelForm: ModelFormGenerator = (args) => {
-    const toModelForm: ToModelForm = (model = null) => {
+  function generateModelForm<T>(
+    args: ModelFormGeneratorArguments<T>
+  ): ToModelForm<T> {
+    const toModelForm: ToModelForm<T> = (model = null) => {
       if (model === null) {
-        const values = {};
+        const values = {} as T;
         args.simpleKeys?.forEach((key) => {
           Object.assign(values, {
             [key]: null,
           });
         });
         if (args.complexKeys)
-          for (const [key, getters] of Object.entries<ModelFormSetter>(
-            args.complexKeys
-          )) {
+          Object.entries(args.complexKeys).forEach(([key, getters]) => {
             Object.assign(values, {
-              [key]: getters?.get(),
+              [key]: (getters as ModelFormSetter<T>).get(),
             });
-          }
+          });
         return useForm(values);
       }
 
-      const values = args.simpleKeys ? _.pick(model, args.simpleKeys) : {};
+      const values = args.simpleKeys
+        ? _.pick(model, args.simpleKeys)
+        : ({} as T);
 
       if (args.complexKeys)
-        for (const [key, getters] of Object.entries<ModelFormSetter>(
-          args.complexKeys
-        )) {
-          values[key] = getters.set ? getters.set(model) : model[key];
+        for (const [key, getters] of Object.entries(args.complexKeys)) {
+          if ((getters as ModelFormSetter<T>).set)
+            values[key] = (getters as Required<ModelFormSetter<T>>).set(model);
+          else model[key];
         }
 
       return useForm(values);
     };
 
     return toModelForm;
-  };
+  }
 
   return {
     generateModelForm,

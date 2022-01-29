@@ -20,12 +20,13 @@
       "@/*": ["resources/js/*"]
     },
     "skipLibCheck": true, // Skip type checking of declaration files
-    "noImplicitAny": false // Bypass raising errors on `any` type
+    "noImplicitAny": false, // Bypass raising errors on `any` type
+    "lib": ["es5", "es6", "dom", "dom.iterable"]
   },
   "exclude": ["node_modules", "public", "dist"],
   "include": [
     "resources/js/**/*",
-    "shims-vue.d.ts",
+    "resources/js/shims-vue.d.ts",
     "src/naive-inertia-js-components"
   ] // Frontend paths pattern
 }
