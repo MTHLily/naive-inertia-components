@@ -1,6 +1,6 @@
 {
     "name": "naive-inertia-components",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "description": "A Naive UI-to-Laravel Adaptor.",
     "main": "dist/mthlily-naive-inertia-js-components.ssr.js",
     "browser": "dist/mthlily-naive-inertia-js-components.esm.js",
