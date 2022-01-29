@@ -21597,9 +21597,18 @@ var useLaravelDataTable = function useLaravelDataTable(paginationData, unprocess
     });
   };
 
+  var unsubscribe = [];
   filterColumns.forEach(function (column) {
-    if (column.filterType === "text") (0,vue__WEBPACK_IMPORTED_MODULE_13__.watch)(column, lodash__WEBPACK_IMPORTED_MODULE_12___default().throttle(handleTextFilter, 1000));
-    if (column.filterType === "daterange") (0,vue__WEBPACK_IMPORTED_MODULE_13__.watch)(column, handleDateRangeFilter);
+    if (column.filterType === "text") {
+      unsubscribe.push((0,vue__WEBPACK_IMPORTED_MODULE_13__.watch)(column, lodash__WEBPACK_IMPORTED_MODULE_12___default().throttle(handleTextFilter, 1000)));
+    }
+
+    if (column.filterType === "daterange") unsubscribe.push((0,vue__WEBPACK_IMPORTED_MODULE_13__.watch)(column, handleDateRangeFilter));
+  });
+  (0,vue__WEBPACK_IMPORTED_MODULE_13__.onUnmounted)(function () {
+    unsubscribe.forEach(function (unsub) {
+      return unsub();
+    });
   });
   return {
     columns: columns,

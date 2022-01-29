@@ -3,7 +3,7 @@ import {
   FilterOptionValue,
   OnUpdateFilters,
 } from "naive-ui/lib/data-table/src/interface";
-import { ref, Ref, watch } from "vue";
+import { onUnmounted, ref, Ref, watch, WatchStopHandle } from "vue";
 import { RouteAdaptor } from "../../Adaptors";
 import { LaravelPagination } from "../../Pagination";
 import {
@@ -130,10 +130,18 @@ export const useLaravelDataTable: LaravelDataTableComposable = (
     });
   };
 
+  const unsubscribe: WatchStopHandle[] = [];
+
   filterColumns.forEach((column) => {
-    if (column.filterType === "text")
-      watch(column, _.throttle(handleTextFilter, 1000));
-    if (column.filterType === "daterange") watch(column, handleDateRangeFilter);
+    if (column.filterType === "text") {
+      unsubscribe.push(watch(column, _.throttle(handleTextFilter, 1000)));
+    }
+    if (column.filterType === "daterange")
+      unsubscribe.push(watch(column, handleDateRangeFilter));
+  });
+
+  onUnmounted(() => {
+    unsubscribe.forEach((unsub) => unsub());
   });
 
   return {
