@@ -1,3 +1,4 @@
+import { InputProps, DatePickerProps } from "naive-ui";
 import { PropType } from "vue";
 import { RouteAdaptorComposition } from "../../Adaptors";
 import { LaravelPagination } from "../../Pagination";
@@ -19,6 +20,14 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
+    textFilterFieldProps: {
+        type: PropType<InputProps>;
+        default: () => {};
+    };
+    daterangeFilterFieldProps: {
+        type: PropType<DatePickerProps>;
+        default: () => {};
+    };
 }, {
     pagination: import("vue").ComputedRef<{
         handlePageChange: (page: number) => void;
@@ -34,6 +43,7 @@ declare const _default: import("vue").DefineComponent<{
         handleDateRangeFilter: import("./interface").OnFilterDateRange;
         handleSort: import("./interface").OnHandleSort;
     };
+    nic_loading: any;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, Record<string, any>, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     columns: {
         type: PropType<LaravelDataTableColumns<unknown>>;
@@ -51,8 +61,18 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
+    textFilterFieldProps: {
+        type: PropType<InputProps>;
+        default: () => {};
+    };
+    daterangeFilterFieldProps: {
+        type: PropType<DatePickerProps>;
+        default: () => {};
+    };
 }>>, {
     loading: boolean;
     adaptor: RouteAdaptorComposition;
+    textFilterFieldProps: InputProps;
+    daterangeFilterFieldProps: DatePickerProps;
 }>;
 export default _default;

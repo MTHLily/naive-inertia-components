@@ -103,6 +103,7 @@ export const useLaravelDataTable: LaravelDataTableComposable = (
   };
 
   const handleDateRangeFilter: OnFilterDateRange = (value) => {
+    if (value.filterDateRangeValue === null) return;
     const query = adaptor.getQuery();
     const filterValue = (value.filterDateRangeValue as number[])
       .map((date) => new Date(date).toISOString().split("T")[0])

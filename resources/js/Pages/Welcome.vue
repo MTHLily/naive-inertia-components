@@ -1,7 +1,11 @@
 <template>
   <Head title="Welcome" />
   <!-- <n-inertia-data-table :pagination-data="users" :columns="table.columns" /> -->
-  <package-table :pagination-data="users" :columns="table.columns" />
+  <package-table
+    :pagination-data="users"
+    :columns="table.columns"
+    :text-filter-field-props="{ round: true }"
+  />
   <n-form>
     <n-inertia-form-item :form="form" form-key="name" label="Name">
       <n-input v-model:value="form.name" />
