@@ -40,7 +40,14 @@ import {
   InputProps,
   DatePickerProps,
 } from "naive-ui";
-import { computed, defineComponent, PropType, ref } from "vue";
+import {
+  computed,
+  defineComponent,
+  onUnmounted,
+  PropType,
+  ref,
+  watch,
+} from "vue";
 import { RouteAdaptorComposition, useDefaultAdaptor } from "../../Adaptors";
 import { LaravelPagination, useLaravelPagination } from "../../Pagination";
 import { LaravelDataTableColumns } from "./interface";
@@ -83,10 +90,18 @@ export default defineComponent({
       default: () => ({}),
     },
   },
-  setup(props) {
+  setup(props, { emit }) {
     let _loading;
-    if (props.loading !== null) _loading = ref(props.loading);
-    else _loading = ref(false);
+    if (props.loading !== null) {
+      _loading = ref(props.loading);
+      const unsubscribeLoading = watch(
+        () => _loading,
+        (val) => emit("update:loading", val)
+      );
+      onUnmounted(() => {
+        unsubscribeLoading();
+      });
+    } else _loading = ref(false);
 
     const adaptor = props.adaptor(_loading);
     const pagination = computed(() =>

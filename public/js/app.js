@@ -21869,10 +21869,23 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  setup: function setup(props) {
+  setup: function setup(props, _ref) {
+    var emit = _ref.emit;
+
     var _loading;
 
-    if (props.loading !== null) _loading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(props.loading);else _loading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
+    if (props.loading !== null) {
+      _loading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(props.loading);
+      var unsubscribeLoading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(function () {
+        return _loading;
+      }, function (val) {
+        return emit("update:loading", val);
+      });
+      (0,vue__WEBPACK_IMPORTED_MODULE_0__.onUnmounted)(function () {
+        unsubscribeLoading();
+      });
+    } else _loading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
+
     var adaptor = props.adaptor(_loading);
     var pagination = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
       return (0,_Pagination__WEBPACK_IMPORTED_MODULE_7__.useLaravelPagination)(props.paginationData, adaptor, _loading);
